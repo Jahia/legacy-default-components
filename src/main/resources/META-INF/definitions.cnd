@@ -1,0 +1,80 @@
+<jmix = 'http://www.jahia.org/jahia/mix/1.0'>
+<jnt = 'http://www.jahia.org/jahia/nt/1.0'>
+<mix = 'http://www.jcp.org/jcr/mix/1.0'>
+<nt = 'http://www.jcp.org/jcr/nt/1.0'>
+
+[jmix:glossary] > jmix:templateMixin mixin
+ extends = jmix:list, jnt:area
+ itemtype = layout
+ - field (string, choicelist[sortableFieldnames]) indexed=no
+ - useMainResource (boolean)
+
+[jmix:listOrdered] > jmix:templateMixin mixin
+ extends = jmix:list, jnt:area
+ itemtype = layout
+ - j:className (string) indexed=no
+
+[jmix:columns] > jmix:templateMixin mixin
+ extends = jmix:list, jnt:area
+ itemtype = layout
+ - j:columns (long)
+
+// Deprecated (usage unknown)
+[jmix:userFilterable] mixin
+ - firstField (string, choicelist[sortableFieldnames]) indexed=no
+ - secondField (string, choicelist[sortableFieldnames]) indexed=no
+ - thirdField (string, choicelist[sortableFieldnames]) indexed=no
+
+[jnt:pager] > jnt:content, jmix:siteComponent, jmix:bindedComponent
+ - pageSize (long) = '10' autocreated
+ - displayPager (boolean) = 'true' autocreated
+ - nbOfPages (long) = '10' autocreated
+ - displayNbOfItemsPerPage (boolean) = 'true' autocreated
+ - displayNbOfItemsPerPageValues (string) = '5,10,25,50,100' indexed=no < '[0-9,]*'
+
+[jnt:fileList] > jnt:content, jmix:listContent, jmix:editorialContent, jmix:bindedComponent, jmix:link
+ - folder (weakreference, picker[type='folder'])
+ - useNodeNameAsTitle (boolean) = 'true' autocreated
+
+[jnt:frame] > jnt:content, mix:title, jmix:structuredContent, jmix:siteComponent
+ - source (string) internationalized indexed=no
+ - name (string) indexed=no
+ - width (long) mandatory indexed=no
+ - height (long) mandatory indexed=no
+ - frameborder (boolean) indexed=no
+ - marginwidth (long) = '0' indexed=no
+ - marginheight (long) = '0' indexed=no
+ - scrolling (string, choicelist[resourceBundle]) indexed=no < 'yes', 'no', 'auto'
+
+[jnt:video] > jnt:content, mix:title, jmix:multimediaContent
+ - source (weakreference, picker[type='file'])
+ - width (long) = '300'
+ - height (long) = '200'
+ - autoplay (boolean)
+ - forceFlashPlayer (boolean)
+
+// Deprecated
+[jnt:flash] > jnt:content, mix:title, jmix:multimediaContent, jmix:hiddenType
+ - flashSource (weakreference, picker[type='file'])
+ - width (string) mandatory analyzer=keyword nofulltext < '^\\d+[%]?$'
+ - height (string) mandatory analyzer=keyword nofulltext < '^\\d+[%]?$'
+ - flashPlayer (string) = '9.0.0' analyzer=keyword nofulltext
+ - id (string) analyzer=keyword nofulltext
+ - name (string)
+ - swliveconnect (string, choicelist[resourceBundle]) analyzer=keyword nofulltext < 'true', 'false'
+ - play (string, choicelist[resourceBundle]) indexed=no < 'true', 'false'
+ - loop (string, choicelist[resourceBundle]) indexed=no < 'true', 'false'
+ - menu (string, choicelist[resourceBundle]) indexed=no < 'true', 'false'
+ - quality (string, choicelist[resourceBundle]) analyzer=keyword nofulltext < 'low', 'high', 'autolow', 'autohigh', 'best'
+ - scale (string, choicelist[resourceBundle]) analyzer=keyword nofulltext < 'default', 'noborder', 'exactfit'
+ - align (string, choicelist[resourceBundle]) indexed=no < 'l', 'r', 't', 'b'
+ - salign (string, choicelist[resourceBundle]) indexed=no < 'l', 'r', 't', 'b', 'tl', 'tr', 'bl', 'br'
+ - wmode (string, choicelist[resourceBundle]) indexed=no < 'window', 'opaque', 'transparent'
+ - bgcolor (string, color) indexed=no
+ - base (string) indexed=no
+ - flashvars (string) indexed=no
+
+[jnt:mainContent] > jnt:content, mix:title, jmix:structuredContent, jmix:editorialContent
+ - body (string, richtext) internationalized
+ - image (weakreference, picker[type='image']) internationalized
+ - align (string, choicelist[resourceBundle]) = 'left' indexed=no < 'left', 'right', 'default'
