@@ -64,11 +64,14 @@
     <properties>
         <jahia-module-signature>MC0CFQCLDTfFTMapPQcV7XVSM1kg4uyVgAIUAWpFPpb7GpM4RwnOnOG+2CSGtvU=</jahia-module-signature>
         <jahia-static-resources>/css,/images,/javascript,/swf</jahia-static-resources>
+        <jahia-depends>default=8.7</jahia-depends>
     </properties>
 
     <scm>
-        <connection>scm:dummy:uri</connection>
-        <developerConnection>scm:dummy:uri</developerConnection>
+        <connection>scm:git:git@github.com:Jahia/legacy-default-components.git</connection>
+        <developerConnection>scm:git:git@github.com:Jahia/legacy-default-components.git</developerConnection>
+        <url>scm:git:git@github.com:Jahia/legacy-default-components.git</url>
+        <tag>HEAD</tag>
     </scm>
 
     <repositories>
@@ -92,11 +95,6 @@
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Jahia-Depends>default</Jahia-Depends>
-                    </instructions>
-                </configuration>
             </plugin>
         </plugins>
     </build>
