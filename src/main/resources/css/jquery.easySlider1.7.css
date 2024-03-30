@@ -50,10 +50,10 @@
 		position:relative;
 		width:30px;
 		height:77px;
-		background:url(../../../../../jahia-dev-private/default/src/main/resources/css/images/jquery.easySlider1.7/btn_prev.png) no-repeat 0 0;
+		background:url(images/jquery.easySlider1.7/btn_prev.png) no-repeat 0 0;
 		}	
 	#nextBtn a, #slider1next a{ 
-		background:url(../../../../../jahia-dev-private/default/src/main/resources/css/images/jquery.easySlider1.7/btn_next.png) no-repeat 0 0;
+		background:url(images/jquery.easySlider1.7/btn_next.png) no-repeat 0 0;
 		}	
 		
 	/* numeric controls */	
@@ -65,7 +65,7 @@
 		border: 1px solid #ccc;
 		padding:0.5em 0.5em;
 		margin:0.5em 0;
-		background:#e1e1e1  url(../../../../../jahia-dev-private/default/src/main/resources/css/images/jquery.easySlider1.7/1px-white.png) repeat-x top left;
+		background:#e1e1e1  url(images/jquery.easySlider1.7/1px-white.png) repeat-x top left;
 		list-style:none;
 		}
  ol#controls{

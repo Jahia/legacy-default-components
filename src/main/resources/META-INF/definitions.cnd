@@ -78,3 +78,119 @@
  - body (string, richtext) internationalized
  - image (weakreference, picker[type='image']) internationalized
  - align (string, choicelist[resourceBundle]) = 'left' indexed=no < 'left', 'right', 'default'
+
+[jnt:loginForm] > jnt:content, mix:title, jmix:formContent
+ - j:displayRememberMeButton (boolean)
+ - j:displayLoginButton (boolean)
+
+[jnt:logout] > jnt:content, jmix:siteComponent, jmix:studioOnly, mix:title
+
+[jnt:login] > jnt:content, jmix:siteComponent, jmix:studioOnly, mix:title
+
+[jnt:shortcuts] > jnt:content, jmix:siteComponent
+
+[jnt:banner] > jnt:content, mix:title, jmix:structuredContent, jmix:editorialContent
+ - background (weakreference, picker[type='image']) internationalized
+ - cast (string, richtext) internationalized
+ - positionTop (long) indexed=no
+ - positionLeft (long) indexed=no
+
+[jnt:pageTitle] > jnt:content, jmix:siteComponent
+ - hideInHomePage (boolean)
+
+[jnt:pageBreadcrumb] > jnt:content, jmix:siteComponent
+ - displayHome (boolean) = 'true' indexed=no
+ - displayCurrentPage (boolean) = 'true' indexed=no
+ - displayLinkOnCurrentPage (boolean) = 'false' indexed=no
+ - displayOnFirstLevel (boolean) = 'false' indexed=no
+
+// Deprecated
+[jnt:tree] > jnt:content, jmix:siteComponent, jmix:hiddenType
+ - nodeType (string, choicelist[subnodetypes='jnt:page,jnt:contentList,jnt:folder',resourceBundle]) mandatory indexed=no
+ - templateForLink (string, choicelist[templates,resourceBundle]) mandatory indexed=no
+
+[jnt:pageFormCreation] > jnt:content, jmix:formContent, mix:title
+ - templateNode (weakreference, choicelist[templatesNode='pageTemplate']) mandatory < 'jnt:template'
+ - buttonLabel (string) internationalized nofulltext
+ - useDescription (boolean) = 'false'
+ - class (string) indexed=no
+ - stayOnPage (boolean) = 'false'
+ - i18npages (boolean) = 'true'
+
+[jnt:backToParentPage] > jnt:content, jmix:siteComponent, mix:title
+
+// Deprecated
+[jnt:addContent] > jnt:content, mix:title, jmix:siteComponent, jmix:bindedComponent, jmix:studioOnly, jmix:hiddenType
+ - j:type (string, choicelist[nodetypes='jmix:editorialContent',resourceBundle]) multiple indexed=no
+
+// Deprecated
+[jnt:introduction] > jnt:bigText, jmix:structuredContent, jmix:editorialContent, jmix:hiddenType
+
+[jnt:gotoStudio] > jnt:content, mix:title, jmix:siteComponent, jmix:studioOnly
+
+[jnt:gotoEdit] > jnt:content, mix:title, jmix:siteComponent, jmix:studioOnly
+
+[jnt:gotoContribute] > jnt:content, mix:title, jmix:siteComponent, jmix:studioOnly
+
+[jnt:gotoAdmin] > jnt:content, mix:title, jmix:link, jmix:siteComponent, jmix:studioOnly
+ - toAdminComponent (string, choicelist[resourceBundle]) = 'all' indexed=no < 'all', 'users', 'groups'
+ - buttonClass (string) indexed=no
+
+[jnt:gotoManager] > jnt:content, mix:title, jmix:siteComponent, jmix:studioOnly
+
+[jnt:displayMetadata] > jnt:content, jmix:siteComponent, jmix:bindedComponent
+ - creationdate (boolean)
+ - creator (boolean)
+ - lastmodification (boolean)
+ - lastcontributor (boolean)
+ - description (boolean)
+ - keywords (boolean)
+ - categories (boolean)
+
+[jnt:displayCurrentLanguage] > jnt:content, jmix:siteComponent
+
+[jnt:siblingNavigation] > jnt:content, jmix:siteComponent
+ - displayLinktoParent (boolean) indexed=no
+
+[jnt:categorizing] > jnt:content, mix:title, jmix:socialComponent, jmix:bindedComponent
+
+[jnt:displayCategories] > jnt:content, mix:title, jmix:socialComponent, jmix:bindedComponent
+
+[jmix:gadget] mixin
+
+[jnt:commentsList] > jnt:content, jmix:bindedComponent, jmix:socialComponent
+
+[jnt:addComment] > jnt:content, jmix:bindedComponent, jmix:socialComponent
+
+[jnt:siteLink] > jnt:content, mix:title, jmix:siteComponent, jmix:studioOnly
+ - targetTemplate (string) indexed=no
+ - targetPageName (string) indexed=no
+ - aClass (string) indexed=no
+ - divClass (string) indexed=no
+
+// Deprecated
+[jnt:workflowMonitor] > jnt:content, jmix:siteComponent, jmix:bindedComponent, jmix:studioOnly, jmix:hiddenType
+ - workflowType (string, choicelist[workflowTypes])
+
+[jnt:modeDispatcher] > jnt:content, jmix:layoutComponentContent, jmix:studioOnly orderable
+ - mode (string, choicelist[renderModes='noGWT'])
+ + * (jmix:droppableContent) = jmix:droppableContent
+
+[jnt:createWebProject] > jnt:content, mix:title, jmix:siteComponent, jmix:studioOnly
+ - useServerName (boolean)
+ - useDescription (boolean)
+ - useTemplatesSet (boolean)
+ - mixLanguage (boolean)
+ - allowsUnlistedLanguages (boolean)
+ - forceLanguage (string)
+ - class (string) indexed=no
+ - defaultTemplatesSet (weakreference, choicelist[nodes='/modules;jnt:virtualsite'])
+ - buttonLabel (string) internationalized nofulltext
+
+[jnt:openInPopup] > jnt:content, jmix:siteComponent, jmix:studioOnly
+ + * (jmix:droppableContent) = jmix:droppableContent
+ - popupClass (string) indexed=no
+ - buttonClass (string) indexed=no
+ - buttonLabel (string) internationalized nofulltext
+
+[jnt:toggleMobileDisplay] > jnt:content, jmix:siteComponent, jmix:studioOnly
