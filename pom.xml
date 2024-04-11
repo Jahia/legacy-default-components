@@ -28,7 +28,7 @@
         GNU General Public License for more details.
 
         You should have received a copy of the GNU General Public License
-        along with this program. If not, see <http://www.gnu.org/licenses/>.
+        along with this program. If not, see <http://www.gnu.org/licenses />.
 
 
         2/ JSEL - Commercial and Supported Versions of the program
@@ -44,20 +44,17 @@
         please contact the sales department at sales@jahia.com.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>jahia-modules</artifactId>
         <groupId>org.jahia.modules</groupId>
-        <version>8.2.0.0-SNAPSHOT</version>
+        <version>8.2.0.0</version>
     </parent>
 
     <artifactId>legacy-default-components</artifactId>
     <name>Legacy Default Components</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>bundle</packaging>
     <description>This is a module that contains legacy components previously provided by module (default).</description>
 
@@ -71,7 +68,7 @@
         <connection>scm:git:git@github.com:Jahia/legacy-default-components.git</connection>
         <developerConnection>scm:git:git@github.com:Jahia/legacy-default-components.git</developerConnection>
         <url>scm:git:git@github.com:Jahia/legacy-default-components.git</url>
-        <tag>HEAD</tag>
+        <tag>1_0_0</tag>
     </scm>
 
     <repositories>
