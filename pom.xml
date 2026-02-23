@@ -64,6 +64,21 @@
         <jahia-depends>default=8.7</jahia-depends>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <!-- required to use the json taglib (http://www.atg.com/taglibs/json) in the JSPs -->
+            <groupId>atg.taglib.json</groupId>
+            <artifactId>json-taglib</artifactId>
+            <version>0.4.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-el</artifactId>
+                    <groupId>commons-el</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
     <scm>
         <connection>scm:git:git@github.com:Jahia/legacy-default-components.git</connection>
         <developerConnection>scm:git:git@github.com:Jahia/legacy-default-components.git</developerConnection>
