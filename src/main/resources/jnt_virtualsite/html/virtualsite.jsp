@@ -3,6 +3,7 @@
 <%@ page import="org.jahia.registries.ServicesRegistry" %>
 <%@ page import="org.jahia.services.content.JCRNodeWrapper" %>
 <%@ page import="org.jahia.data.templates.JahiaTemplatesPackage" %>
+<%@ page import="org.jahia.services.templates.JahiaTemplateManagerService" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="functions" uri="http://www.jahia.org/tags/functions" %>
@@ -80,7 +81,8 @@
 
     <%
         JCRNodeWrapper currentNode = (JCRNodeWrapper) pageContext.findAttribute("currentNode");
-        JahiaTemplatesPackage pack = ServicesRegistry.getInstance().getJahiaTemplateManagerService().getTemplatePackageById(currentNode.getName());
+        JahiaTemplateManagerService templateManagerService = ServicesRegistry.getInstance().getJahiaTemplateManagerService();
+        JahiaTemplatesPackage pack = templateManagerService.getTemplatePackageById(currentNode.getName());
         NodeTypeIterator nti = NodeTypeRegistry.getInstance().getNodeTypes(pack.getId());
         pageContext.setAttribute("nodeTypes",nti);
     %>
