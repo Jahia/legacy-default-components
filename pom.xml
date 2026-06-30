@@ -59,7 +59,7 @@
     <description>This is a module that contains legacy components previously provided by module (default).</description>
 
     <properties>
-        <jahia-module-signature>MCwCFEDEkV3b6L2N8yQtSKvJcnpq9ZzHAhQadFHFL5QLchPD4OyGoe2FLH06yg==</jahia-module-signature>
+        <jahia-module-signature>MCwCFG8MQW3+yT7oND6VJQnD5mYmTJLGAhQWpQ69tlJJnYgRMM7mpBGM/6uTjw==</jahia-module-signature>
         <jahia-static-resources>/css,/images,/javascript,/swf</jahia-static-resources>
         <jahia-depends>default=8.7</jahia-depends>
     </properties>
