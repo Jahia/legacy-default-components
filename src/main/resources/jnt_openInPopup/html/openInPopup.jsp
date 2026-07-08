@@ -14,7 +14,7 @@
 </script>
 <c:if test="${not renderContext.editMode}">
 <div style="display:none">
-    <div id="popup-${currentNode.name}" class="${currentNode.properties['popupClass'].string}">
+    <div id="popup-${currentNode.name}" class="${fn:escapeXml(currentNode.properties['popupClass'].string)}">
 </c:if>
 <c:forEach items="${jcr:getChildrenOfType(currentNode,'jmix:droppableContent')}" var="child">
     <template:module path="${child.path}"/>
@@ -26,5 +26,5 @@
     </div>
 </div>
 </c:if>
-<a class="${currentNode.properties['buttonClass'].string}" id="openPopup-${currentNode.name}"
-href="#popup-${currentNode.name}">${currentNode.properties['buttonLabel'].string}</a>
+<a class="${fn:escapeXml(currentNode.properties['buttonClass'].string)}" id="openPopup-${currentNode.name}"
+href="#popup-${currentNode.name}"><c:out value="${currentNode.properties['buttonLabel'].string}"/></a>
