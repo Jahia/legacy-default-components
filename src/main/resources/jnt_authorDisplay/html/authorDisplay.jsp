@@ -22,10 +22,10 @@
 <c:set var="mainTemplate" value="${currentNode.properties['j:userView'].string}"/>
 <c:choose>
     <c:when test="${renderContext.editMode}">
-        <div class="authorDisplayArea<c:if test="${not empty currentNode.properties['j:mockupStyle']}"> ${currentNode.properties['j:mockupStyle'].string}</c:if>">
+        <div class="authorDisplayArea<c:if test="${not empty currentNode.properties['j:mockupStyle']}"> ${fn:escapeXml(currentNode.properties['j:mockupStyle'].string)}</c:if>">
             <c:if test="${not empty currentNode.properties['j:userView'].string}">
                 <div class="authorDisplayTemplate">
-                    <span>${currentNode.properties['j:userView'].string}</span>
+                    <span><c:out value="${currentNode.properties['j:userView'].string}"/></span>
                 </div>
             </c:if>
         </div>

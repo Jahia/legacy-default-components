@@ -36,7 +36,7 @@
 
 <video id="video-${currentNode.identifier}" class="video-js vjs-default-skin" controls <c:if test="${currentNode.properties.autoplay.boolean and not renderContext.editMode}">autoplay</c:if>
        preload="${renderContext.editMode ? "metadata" : "auto"}"
-       width="${currentNode.properties.width.string}" height="${currentNode.properties.height.string}"
+       width="${fn:escapeXml(currentNode.properties.width.string)}" height="${fn:escapeXml(currentNode.properties.height.string)}"
        data-setup='{"techOrder":["html5"]}'>
   <source src="${source.url}" type='${mimeType.string == "video/x-f4v" ? "video/mp4" : mimeType.string}' />
 </video>

@@ -33,7 +33,7 @@
             </c:if>
             <c:if test="${props.creator.boolean}">
                     <dt><fmt:message key="mix_created.jcr_createdBy"/></dt>
-                    <dd>${boundComponent.properties['jcr:createdBy'].string}</dd>
+                    <dd><c:out value="${boundComponent.properties['jcr:createdBy'].string}"/></dd>
             </c:if>
             <c:if test="${props.lastmodification.boolean}">
                     <dt><fmt:message key="mix_lastModified.jcr_lastModified"/></dt>
@@ -42,7 +42,7 @@
             </c:if>
             <c:if test="${props.lastcontributor.boolean}">
                     <dt><fmt:message key="mix_lastModified.jcr_lastModifiedBy"/></dt>
-                    <dd>${boundComponent.properties['jcr:lastModifiedBy'].string}</dd>
+                    <dd><c:out value="${boundComponent.properties['jcr:lastModifiedBy'].string}"/></dd>
             </c:if>
             <c:if test="${props.description.boolean}">
                     <dt><fmt:message key="mix_title.jcr_description"/></dt>
