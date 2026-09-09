@@ -40,7 +40,7 @@
                                 <c:url value="${referedNode.thumbnailUrls['thumbnail']}" var="imgUrl" />
                                 <img src="${imgUrl}" alt=""/><br/>
 
-                                <h3>${referedNode.name}</h3>
+                                <h3>${fn:escapeXml(referedNode.name)}</h3>
                             </div>
                         </c:when>
                         <c:when test="${jcr:isNodeType(referedNode, 'jnt:news')}">
@@ -55,7 +55,7 @@
                                         value="${currentNode.properties.date.time}" pattern="HH:mm" var="dateTimeNews"/><c:if
                                         test="${dateTimeNews != '00:00'}">${dateTimeNews}</c:if>: <jcr:nodeProperty
                                         node="${referedNode}"
-                                        name="jcr:title"/></h3>
+                                        name="jcr:title" var="newsTitle"/><c:out value="${newsTitle.string}"/></h3>
 
                                 <p>${referedNode.properties.desc.string}</p>
 
@@ -77,11 +77,11 @@
                                                                     value="${referedNode.properties.endDate.time}"/></span>
                                 <span class="year"><fmt:formatDate pattern="yyyy"
                                                                    value="${referedNode.properties.endDate.time}"/></span>
-                                <h3><jcr:nodeProperty node="${referedNode}" name="jcr:title"/></h3>
+                                <h3><jcr:nodeProperty node="${referedNode}" name="jcr:title" var="eventTitle"/><c:out value="${eventTitle.string}"/></h3>
 
-                                <p class="eventsLocation"><span>${referedNode.properties.location.string}</span></p>
+                                <p class="eventsLocation"><span>${fn:escapeXml(referedNode.properties.location.string)}</span></p>
 
-                                <p class="eventsLocation"><span>${referedNode.properties.eventsType.string}</span></p>
+                                <p class="eventsLocation"><span>${fn:escapeXml(referedNode.properties.eventsType.string)}</span></p>
 
                             </div>
                         </c:when>

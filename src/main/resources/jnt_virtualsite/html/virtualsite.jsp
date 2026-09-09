@@ -12,27 +12,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="renderContext" type="org.jahia.services.render.RenderContext"--%>
 <c:if test="${currentNode.parent.name eq 'sites'}">
-    <h1>Site: ${currentNode.name}</h1>
+    <h1>Site: ${fn:escapeXml(currentNode.name)}</h1>
 
-    <p>Title: <jcr:nodeProperty node="${currentNode}" name="j:title"/></p>
+    <p>Title: <jcr:nodeProperty node="${currentNode}" name="j:title" var="siteTitle"/><c:out value="${siteTitle.string}"/></p>
 
-    <p>Server name: <jcr:nodeProperty node="${currentNode}" name="j:serverName"/></p>
+    <p>Server name: <jcr:nodeProperty node="${currentNode}" name="j:serverName" var="siteServerName"/><c:out value="${siteServerName.string}"/></p>
 
-    <p>Description: <jcr:nodeProperty node="${currentNode}" name="j:description"/></p>
+    <p>Description: <jcr:nodeProperty node="${currentNode}" name="j:description" var="siteDescription"/><c:out value="${siteDescription.string}"/></p>
 
     <p>Nodes:</p>
     <ul>
         <c:forEach var="child" items="${currentNode.nodes}">
-            <li><a href="<c:url value='${url.base}${child.path}.html'/>">${child.name}</a></li>
+            <li><a href="<c:url value='${url.base}${child.path}.html'/>">${fn:escapeXml(child.name)}</a></li>
         </c:forEach>
     </ul>
 </c:if>
 <c:if test="${currentNode.parent.name eq 'modules'}">
     <c:if test="${currentNode.properties['j:moduleType'].string eq 'module'}">
-        <h1>Module : ${currentNode.name}</h1>
+        <h1>Module : ${fn:escapeXml(currentNode.name)}</h1>
     </c:if>
     <c:if test="${currentNode.properties['j:moduleType'].string eq 'templatesSet'}">
-        <h1>Templates Set : ${currentNode.name}</h1>
+        <h1>Templates Set : ${fn:escapeXml(currentNode.name)}</h1>
     </c:if>
     <jcr:node path="${currentNode.path}/templates/files/template.jpg" var="thumbnail"/>
 
@@ -49,9 +49,9 @@
         </c:if>
     </p>
 
-    <p>Title: <jcr:nodeProperty node="${currentNode}" name="j:title"/></p>
+    <p>Title: <jcr:nodeProperty node="${currentNode}" name="j:title" var="moduleTitle"/><c:out value="${moduleTitle.string}"/></p>
 
-    <p>Version: <jcr:node path="j:versionInfo" var="versionInfo"/><jcr:nodeProperty node="${versionInfo}" name="j:version"/></p>
+    <p>Version: <jcr:node path="j:versionInfo" var="versionInfo"/><jcr:nodeProperty node="${versionInfo}" name="j:version" var="moduleVersion"/><c:out value="${moduleVersion.string}"/></p>
 
     <jcr:jqom statement="select * from [jnt:template] as template where ISDESCENDANTNODE(template,'${functions:sqlencode(currentNode.path)}')" var="templates"/>
 
@@ -60,7 +60,7 @@
         <ul>
             <c:forEach items="${templates.nodes}" var="template">
                 <li>
-                    <a href="<c:url value='${url.base}${template.path}'/>">${template.name}</a>
+                    <a href="<c:url value='${url.base}${template.path}'/>">${fn:escapeXml(template.name)}</a>
                 </li>
             </c:forEach>
         </ul>
@@ -72,7 +72,7 @@
         <ul>
             <c:forEach items="${pages.nodes}" var="page">
                 <li>
-                    <a href="<c:url value='${url.base}${page.path}'/>">${page.name}</a>
+                    <a href="<c:url value='${url.base}${page.path}'/>">${fn:escapeXml(page.name)}</a>
                 </li>
             </c:forEach>
         </ul>
