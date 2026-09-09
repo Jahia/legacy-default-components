@@ -9,7 +9,7 @@
     <h3 class="title"><jcr:nodeProperty node="${currentNode}" name="jcr:title" var="mainContentTitle"/><c:out value="${mainContentTitle.string}"/></h3>
         <c:if test="${!empty image}">
             <div class="imagefloat${fn:escapeXml(currentNode.properties.align.string)}">
-            			<img src="${image.node.url}" alt="${fn:escapeXml(image.node.url)}"/>
+            			<img src="${image.node.url}" alt="${image.node.url}"/>
                         </div>
         </c:if>
 		 ${currentNode.properties.body.string}

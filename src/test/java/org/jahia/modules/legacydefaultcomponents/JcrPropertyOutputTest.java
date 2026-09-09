@@ -1,6 +1,7 @@
 package org.jahia.modules.legacydefaultcomponents;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class JcrPropertyOutputTest {
 
         // A scan that reaches nothing reports the same "clean" as one that passes, so the
         // assertions below only mean something once both counts are non-zero.
-        assertTrue("no views were scanned under " + root, !views.isEmpty());
+        assertFalse("no views were scanned under " + root, views.isEmpty());
         assertTrue("no <jcr:nodeProperty> tags were scanned", tags > 0);
         assertEquals("every <jcr:nodeProperty> is expected to carry a var attribute",
                 Collections.emptyList(), unbound);
