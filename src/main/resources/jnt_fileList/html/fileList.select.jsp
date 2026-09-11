@@ -50,7 +50,7 @@
                             </div>
                         </c:otherwise>
                     </c:choose>
-                        <template:tokenizedForm>
+                        <c:if test="${jcr:hasPermission(subchild,'jcr:removeNode')}">
                             <form action="<c:url value='${url.base}${subchild.path}'/>" method="post"
                                   id="jahia-blog-item-delete-${subchild.UUID}">
                                 <input type="hidden" name="jcrMethodToCall" value="delete"/>
@@ -92,7 +92,7 @@
                                     });
                                 </script>
                             </form>
-                        </template:tokenizedForm>
+                        </c:if>
                 </li>
             </c:if>
         </c:forEach>
