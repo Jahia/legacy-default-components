@@ -20,6 +20,9 @@
     <div class="${currentNode.properties['class'].string}">
 </c:if>
 <utility:setBundle basename="resources.JahiaServerSettings" var="internalBundle"/>
+<%-- adminVirtualSites resolves on /sites, the node the create-site action is itself permitted against. --%>
+<jcr:node var="virtualSitesNode" path="/sites"/>
+<c:if test="${not empty virtualSitesNode and jcr:hasPermission(virtualSitesNode, 'adminVirtualSites')}">
 <template:tokenizedForm  allowsMultipleSubmits="true">
 <form class="webProjectCreation" id="webProjectCreationForm" method="post" action="<c:url value='${url.base}/sites.adminCreateSite.do'/>" >
     <c:if test="${currentNode.properties.stayOnPage.boolean}">
@@ -94,6 +97,7 @@
         <h1><fmt:message key="label.workInProgressTitle"/></h1>
     </div>
 </template:tokenizedForm>
+</c:if>
 
 <c:if test="${not empty currentNode.properties['class']}">
     </div>
