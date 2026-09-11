@@ -9,7 +9,7 @@
 <div id="banner" style="background:transparent url(${background.node.url}) no-repeat top left;">
     <div class="banner-text"
          style='margin-top:${currentNode.properties.positionTop.string}px; margin-left:${currentNode.properties.positionLeft.string}px'>
-        <h2><jcr:nodeProperty node="${currentNode}" name="jcr:title"/></h2>
+        <h2><jcr:nodeProperty node="${currentNode}" name="jcr:title" var="bannerTitle"/><c:out value="${bannerTitle.string}"/></h2>
 
         <p>${currentNode.properties.cast.string}</p>
 

@@ -2,6 +2,7 @@
 <%@ taglib prefix="jcr" uri="http://www.jahia.org/tags/jcr" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="functions" uri="http://www.jahia.org/tags/functions" %>
 
 <jcr:nodeProperty node="${currentNode}" name="flashSource" var="flashSource"/>
 <jcr:nodeProperty node="${currentNode}" name="width" var="widthFlash"/>
@@ -26,7 +27,7 @@
 <template:addResources type="css" resources="flash.css"/>
 
 <script type="text/javascript">
-    swfobject.registerObject("flashcontent${currentNode.UUID}", "${flashPlayer.string}");
+    swfobject.registerObject("flashcontent${currentNode.UUID}", "${functions:escapeJavaScript(flashPlayer.string)}");
 </script>
 <!--[if IE]>
 <object id="flashcontent${currentNode.UUID}" width="${widthFlash.string}" height="${heightFlash.string}"
