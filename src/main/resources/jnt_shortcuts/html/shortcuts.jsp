@@ -29,7 +29,7 @@
     <ul>
         <c:if test="${renderContext.loggedIn}">
             <li>
-                <fmt:message key="welcome"/>, <span class="currentUser">${user:fullName(currentUser)}<c:if test="${not empty currentAliasUser}">(&nbsp;<fmt:message key="as.user"/>&nbsp;${currentAliasUser.username})</c:if>:</span>
+                <fmt:message key="welcome"/>, <span class="currentUser">${user:fullName(currentUser)}<c:if test="${not empty currentAliasUser}">(&nbsp;<fmt:message key="as.user"/>&nbsp;${fn:escapeXml(currentAliasUser.username)})</c:if>:</span>
             </li>
             <li>
                 <a class="loginFormTopLogoutShortcuts"
