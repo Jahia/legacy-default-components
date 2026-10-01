@@ -21,14 +21,17 @@ import java.util.stream.Stream;
 import org.junit.Test;
 
 /**
- * The views render every JCR property value through a bound variable, so the value reaches the
- * page through a tag that encodes it.
+ * The views render JCR property values through a tag or a function that encodes them.
  */
 public class JcrPropertyOutputTest {
 
     private static final Pattern NODE_PROPERTY_TAG =
             Pattern.compile("<jcr:nodeProperty\\b[^>]*?/?>", Pattern.DOTALL);
     private static final Pattern VAR_ATTRIBUTE = Pattern.compile("\\bvar\\s*=");
+    private static final Pattern USER_NAME_EXPRESSION =
+            Pattern.compile("\\$\\{[^}]*'(?:jcr:createdBy|jcr:lastModifiedBy|j:lastPublishedBy)'[^}]*}");
+    private static final Pattern ENCODED_EXPRESSION = Pattern.compile("\\$\\{\\s*fn:escapeXml\\(");
+    private static final Pattern ACTION_TAG_OPENING = Pattern.compile("<\\w+:\\w+\\b");
 
     @Test
     public void everyNodePropertyTagBindsItsValueToAVariable() throws Exception {
@@ -53,6 +56,41 @@ public class JcrPropertyOutputTest {
         assertTrue("no <jcr:nodeProperty> tags were scanned", tags > 0);
         assertEquals("every <jcr:nodeProperty> is expected to carry a var attribute",
                 Collections.emptyList(), unbound);
+    }
+
+    @Test
+    public void everyUserNameIsEncodedWhereTheViewPrintsIt() throws Exception {
+        Path root = viewRoot();
+        List<Path> views = views(root);
+        List<String> unencoded = new ArrayList<>();
+        int expressions = 0;
+
+        for (Path view : views) {
+            String source = read(view);
+            Matcher expression = USER_NAME_EXPRESSION.matcher(source);
+            while (expression.find()) {
+                expressions++;
+                if (!isEncoded(source, expression.start())) {
+                    unencoded.add(root.relativize(view) + " -> " + expression.group());
+                }
+            }
+        }
+
+        assertFalse("no views were scanned under " + root, views.isEmpty());
+        assertTrue("no expression reading a user name property was scanned", expressions > 0);
+        assertEquals("every user name a view prints is expected to go through an encoder",
+                Collections.emptyList(), unencoded);
+    }
+
+    // An expression inside a JSP action tag, such as <c:out value="..."/> or <c:set>, reaches the
+    // page only through that tag. One in template text or in an HTML tag is printed as it stands.
+    private static boolean isEncoded(String source, int start) {
+        if (ENCODED_EXPRESSION.matcher(source).region(start, source.length()).lookingAt()) {
+            return true;
+        }
+        int tagStart = source.lastIndexOf('<', start);
+        boolean insideTag = tagStart > source.lastIndexOf('>', start);
+        return insideTag && ACTION_TAG_OPENING.matcher(source).region(tagStart, start).lookingAt();
     }
 
     private static Path viewRoot() throws URISyntaxException {
