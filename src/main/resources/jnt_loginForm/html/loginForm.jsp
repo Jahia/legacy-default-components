@@ -77,7 +77,7 @@
             </div>
         </div>
         <h3 class="logouticon"><fmt:message key="label.logout"/></h3>
-        <p><fmt:message key="label.loggedAs"/>&nbsp;${renderContext.user.username}<c:if test="${!empty currentAliasUser}"> (as ${currentAliasUser.username})</c:if>
+        <p><fmt:message key="label.loggedAs"/>&nbsp;${fn:escapeXml(renderContext.user.username)}<c:if test="${!empty currentAliasUser}"> (as ${fn:escapeXml(currentAliasUser.username)})</c:if>
         </p>
         <p><a class="aButton"
               href='<c:url value="${url.logout}"/>'><span><fmt:message key="label.logout"/></span></a></p>
