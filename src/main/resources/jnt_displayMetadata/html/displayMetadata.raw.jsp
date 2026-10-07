@@ -22,13 +22,13 @@
     ${boundComponent.properties['jcr:created'].time}
 </c:if>
 <c:if test="${props.creator.boolean}">
-    ${boundComponent.properties['jcr:createdBy'].string}
+    ${fn:escapeXml(boundComponent.properties['jcr:createdBy'].string)}
 </c:if>
 <c:if test="${props.lastmodification.boolean}">
     ${boundComponent.properties['jcr:lastModified'].time}
 </c:if>
 <c:if test="${props.lastcontributor.boolean}">
-    ${boundComponent.properties['jcr:lastModifiedBy'].string}
+    ${fn:escapeXml(boundComponent.properties['jcr:lastModifiedBy'].string)}
 </c:if>
 <c:if test="${props.description.boolean}">
     <c:out value="${boundComponent.properties['jcr:description'].string}" />
