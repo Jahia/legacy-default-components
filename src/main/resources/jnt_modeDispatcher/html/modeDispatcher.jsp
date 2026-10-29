@@ -18,7 +18,7 @@
     <c:if test="${renderContext.editModeConfigName != 'dashboardmode' and renderContext.editMode}">
         Loaded with AJAX call
         <c:if test="${not empty currentNode.properties.mode.string}">
-            from mode ${currentNode.properties.mode.string}
+            from mode <c:out value="${currentNode.properties.mode.string}"/>
         </c:if>
         <c:forEach items="${jcr:getChildrenOfType(currentNode,'jmix:droppableContent')}" var="child">
             <template:module node="${child}"/>
@@ -35,15 +35,17 @@
                 <c:remove var="modeDispatcherId" scope="request"/>
             </c:when>
             <c:otherwise>
+                <%-- A render mode is the name of one URL segment under /cms --%>
+                <c:set var="validMode" value="${functions:matches('[A-Za-z0-9_-]+', currentNode.properties['mode'].string)}"/>
                 <script type="text/javascript">
-                    <c:if test="${empty currentNode.properties['mode'].string}">
+                    <c:if test="${not validMode}">
                     <c:url value="${url.base}${currentNode.path}.html.ajax" var="theUrl">
                     	<c:param name="mainResource" value="${renderContext.mainResource.path}"/>
                     	<c:param name="includeJavascripts" value="true"/>
                     </c:url>
                     $('#item-${currentNode.identifier}').load("${functions:escapeJavaScript(theUrl)}");
                     </c:if>
-                    <c:if test="${not empty currentNode.properties['mode'].string}">
+                    <c:if test="${validMode}">
                     <c:url value="/cms/${currentNode.properties['mode'].string}/${currentResource.locale}${currentNode.path}.html.ajax" var="theUrl">
                     	<c:param name="mainResource" value="${renderContext.mainResource.path}"/>
                     	<c:param name="includeJavascripts" value="true"/>
