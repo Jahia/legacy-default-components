@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="template" uri="http://www.jahia.org/tags/templateLib" %>
 <%@ taglib prefix="jcr" uri="http://www.jahia.org/tags/jcr" %>
 <%--@elvariable id="currentNode" type="org.jahia.services.content.JCRNodeWrapper"--%>
@@ -13,10 +14,10 @@
 <c:set var="mainTemplate" value="${currentNode.properties['j:userView'].string}"/>
 <c:choose>
     <c:when test="${not empty inWrapper and inWrapper eq false}">
-        <div class="area <c:if test="${not empty currentNode.properties['j:mockupStyle']}">${currentNode.properties['j:mockupStyle'].string}</c:if>">
+        <div class="area <c:if test="${not empty currentNode.properties['j:mockupStyle']}">${fn:escapeXml(currentNode.properties['j:mockupStyle'].string)}</c:if>">
             <c:if test="${not empty currentNode.properties['j:userView'].string}">
                 <div class="areaTemplate">
-                    <span>${currentNode.properties['j:userView'].string}</span>
+                    <span><c:out value="${currentNode.properties['j:userView'].string}"/></span>
                 </div>
             </c:if>
             <div class="AreaInformation">
