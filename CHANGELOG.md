@@ -1,0 +1,21 @@
+# legacy-default-components Changelog
+
+## 0.0.1
+
+* Consistently escape special characters in the user and alias names shown by the login form and shortcuts views, so a name containing characters such as `<`, `>` or `&` renders as written.
+
+* Fixed the mode dispatcher component so that characters such as `<` or `&` in its mode display as text in edit mode.
+
+* Added maven.jahia.com to the Maven repositories legacy-default-components uses to download its dependencies.
+
+* Fixed the current user component so that a style or view name containing `<`, `&` or quotes is kept intact in the page.
+
+* Fixed display of editor-set text and attribute values containing special characters across the legacy default components views (button/popup, author, metadata, video).
+
+* Changed the file list's select view so that its delete control is shown to users who are allowed to delete the file.
+
+* Changed the web project creation component so that its form is shown to users who are allowed to create a web project.
+
+* Fixed the display of titles and labels containing special characters in the legacy default components.
+
+* Fixed the raw view of the metadata component so that creator and last contributor names containing special characters are displayed as text.
