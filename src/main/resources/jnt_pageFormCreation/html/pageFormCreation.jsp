@@ -10,7 +10,7 @@
 <c:set var="nodeType" value="jnt:page" />
 
 <c:if test="${not empty currentNode.properties['class']}">
-    <div class="${currentNode.properties['class'].string}">
+    <div class="${fn:escapeXml(currentNode.properties['class'].string)}">
 </c:if>
 
 <template:tokenizedForm>
@@ -45,7 +45,7 @@
         </c:if>
         <div>
             <fmt:message key="label.noTitle" var="i18nNoTitle"/>
-            <input type="submit" class="button" id="${currentNode.identifier}_submitButton" value="${currentNode.properties['buttonLabel'].string}" tabindex="28" ${disabled}/>
+            <input type="submit" class="button" id="${currentNode.identifier}_submitButton" value="${fn:escapeXml(currentNode.properties['buttonLabel'].string)}" tabindex="28" ${disabled}/>
             <script type="text/javascript">
                 $(document).ready(function() {
                     var button = document.getElementById("${currentNode.identifier}_submitButton");
