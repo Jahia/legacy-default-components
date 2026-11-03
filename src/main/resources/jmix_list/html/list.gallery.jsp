@@ -24,7 +24,7 @@
             <c:if test="${jcr:isNodeType(referedNode, 'jmix:thumbnail')}">
                 <c:choose>
                     <c:when test="${not renderContext.editMode}">
-                        <a class="zoom" rel="group" title="${referedNode.name}" href="${referedNode.url}?r=1">
+                        <a class="zoom" rel="group" title="${fn:escapeXml(referedNode.name)}" href="${referedNode.url}?r=1">
                             <c:url value="${referedNode.thumbnailUrls['thumbnail']}" var="imgUrl" />
                             <img src="${imgUrl}" alt=""/>
                         </a>
