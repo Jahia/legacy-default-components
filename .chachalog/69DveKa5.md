@@ -2,4 +2,4 @@
 legacy-default-components: patch
 ---
 
-Fixed the display of site link style values and link targets containing special characters, so they render as typed.
+Fixed the display of site links whose style values contain special characters, so these values render as typed.
