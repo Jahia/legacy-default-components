@@ -33,6 +33,8 @@ public class JcrPropertyOutputTest {
     private static final Pattern VAR_ATTRIBUTE = Pattern.compile("\\bvar\\s*=");
     private static final Pattern USER_NAME_EXPRESSION =
             Pattern.compile("\\$\\{[^}]*'(?:jcr:createdBy|jcr:lastModifiedBy|j:lastPublishedBy)'[^}]*}");
+    private static final Pattern DISPLAYABLE_NAME_EXPRESSION =
+            Pattern.compile("\\$\\{[^}]*\\bdisplayableName\\b[^}]*}");
     private static final Pattern ENCODED_EXPRESSION = Pattern.compile("\\$\\{\\s*fn:escapeXml\\(");
     private static final Pattern TAGLIB_PREFIX = Pattern.compile("<%@\\s*taglib\\b[^>]*?\\bprefix\\s*=\\s*\"(\\w+)\"");
     private static final Pattern JSP_COMMENT = Pattern.compile("<%--.*?--%>", Pattern.DOTALL);
@@ -92,6 +94,44 @@ public class JcrPropertyOutputTest {
         assertTrue("no expression reading a user name property was scanned", expressions > 0);
         assertEquals("every user name a view prints is expected to go through an encoder",
                 Collections.emptyList(), unencoded);
+    }
+
+    @Test
+    public void everyDisplayableNameInAnHtmlAttributeIsEncoded() throws Exception {
+        Path root = viewRoot();
+        List<Path> views = views(root);
+        List<String> unencoded = new ArrayList<>();
+        int expressions = 0;
+
+        for (Path view : views) {
+            String source = JSP_COMMENT.matcher(read(view)).replaceAll("");
+            Set<String> prefixes = taglibPrefixes(source);
+            Matcher expression = DISPLAYABLE_NAME_EXPRESSION.matcher(source);
+            while (expression.find()) {
+                if (!isInHtmlTag(source, expression.start(), prefixes)) {
+                    continue;
+                }
+                expressions++;
+                if (!isEncoded(source, expression.group(), expression.start(), prefixes)) {
+                    unencoded.add(root.relativize(view) + " -> " + expression.group());
+                }
+            }
+        }
+
+        assertFalse("no views were scanned under " + root, views.isEmpty());
+        assertTrue("no displayableName expression in an HTML attribute was scanned", expressions > 0);
+        assertEquals("every displayableName a view prints in an HTML attribute is expected to go through an encoder",
+                Collections.emptyList(), unencoded);
+    }
+
+    // An HTML tag is open at this position, and it is no JSP action tag.
+    private static boolean isInHtmlTag(String source, int start, Set<String> prefixes) {
+        int tagStart = source.lastIndexOf('<', start);
+        if (tagStart < 0 || tagStart < source.lastIndexOf('>', start)) {
+            return false;
+        }
+        Matcher tag = ACTION_TAG_NAME.matcher(source).region(tagStart, start);
+        return !tag.lookingAt() || !prefixes.contains(tag.group(1));
     }
 
     // An expression inside the attribute of a JSP action tag, such as <c:out value="..."/>,
