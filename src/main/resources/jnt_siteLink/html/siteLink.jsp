@@ -12,7 +12,8 @@
     <jcr:node var="targetNode" path="${targetNode.path}/${currentNode.properties['targetPageName'].string}" />
 </c:if>
 
-${currentNode.properties['mode'].string}
-<div class="${currentNode.properties['divClass'].string}"><!--start preferences-->
-    <a title="${fn:escapeXml(currentNode.displayableName)}" class="${currentNode.properties['aClass'].string}" href="<c:url value='${url.base}${targetNode.path}.${currentNode.properties["targetTemplate"].string}.html'/>">${fn:escapeXml(currentNode.displayableName)}</a>
+${fn:escapeXml(currentNode.properties['mode'].string)}
+<c:url var="targetUrl" value="${url.base}${targetNode.path}.${currentNode.properties['targetTemplate'].string}.html"/>
+<div class="${fn:escapeXml(currentNode.properties['divClass'].string)}"><!--start preferences-->
+    <a title="${fn:escapeXml(currentNode.displayableName)}" class="${fn:escapeXml(currentNode.properties['aClass'].string)}" href="${fn:escapeXml(targetUrl)}">${fn:escapeXml(currentNode.displayableName)}</a>
 </div>
