@@ -176,9 +176,10 @@
                             href="#editSiteDiv${node.identifier}" class="changePropertiesButton" id="changePropertiesButton${node.identifier}"><fmt:message key="label.manageSite.changeProperties"/></a>
                     </c:if>
                     <c:if test="${currentNode.properties.details.boolean && jcr:hasPermission(node,'adminVirtualSites')}">
+                        <c:url var="detailsUrl" value="${basePreview}${node.path}${page}.${currentNode.properties.detailsTemplate.string}.html"/>
                         <img src="<c:url value='/icons/admin.png'/>" width="16" height="16" alt=" "
                              role="presentation" style="position:relative; top: 4px; margin-right:2px; "/><a
-                            href="<c:url value='${basePreview}${node.path}${page}.${currentNode.properties.detailsTemplate.string}.html'/>"
+                            href="${fn:escapeXml(detailsUrl)}"
                             class="detailsButton" id="detailsButton${node.identifier}"><c:out value="${currentNode.properties.detailsLabel.string}"/></a>
                     </c:if>
 
