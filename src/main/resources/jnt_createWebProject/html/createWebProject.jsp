@@ -17,7 +17,7 @@
 <c:set var="nodeType" value="jnt:page" />
 
 <c:if test="${not empty currentNode.properties['class']}">
-    <div class="${currentNode.properties['class'].string}">
+    <div class="${fn:escapeXml(currentNode.properties['class'].string)}">
 </c:if>
 <utility:setBundle basename="resources.JahiaServerSettings" var="internalBundle"/>
 <%-- adminVirtualSites resolves on /sites, the node the create-site action is itself permitted against. --%>
@@ -74,12 +74,12 @@
         </c:if>
 
         <c:if test="${not empty currentNode.properties['forceLanguage'].string}">
-            <input type="hidden" name="language" value="${currentNode.properties['forceLanguage'].string}">
+            <input type="hidden" name="language" value="${fn:escapeXml(currentNode.properties['forceLanguage'].string)}">
         </c:if>
 
         <div>
             <input type="button" class="button" id="createSite_button"
-                   value="${currentNode.properties['buttonLabel'].string}" tabindex="28" ${disabled}/>
+                   value="${fn:escapeXml(currentNode.properties['buttonLabel'].string)}" tabindex="28" ${disabled}/>
             <script type="text/javascript">
                 $(document).ready(function() {
                     var button = document.getElementById("createSite_button");

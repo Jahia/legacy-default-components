@@ -32,7 +32,7 @@
     </c:when>
     <c:otherwise>
         <c:set var="isEmpty" value="true"/>
-        <ul class="${currentNode.properties['j:className'].string}">
+        <ul class="${fn:escapeXml(currentNode.properties['j:className'].string)}">
             <c:forEach items="${moduleMap.currentList}" var="subchild" begin="${moduleMap.begin}" end="${moduleMap.end}">
                 <li><template:module node="${subchild}" view="${moduleMap.subNodesView}" editable="${moduleMap.editable}"/></li>
                 <c:set var="isEmpty" value="false"/>
