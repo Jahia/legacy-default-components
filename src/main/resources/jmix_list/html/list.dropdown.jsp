@@ -16,7 +16,7 @@
 <template:addResources type="css" resources="dropdown.css"/>
 <template:include view="hidden.header"/>
 
-<ul class="dropdown ${currentNode.properties['j:className'].string}">
+<ul class="dropdown ${fn:escapeXml(currentNode.properties['j:className'].string)}">
     <li>
         <a href="#">${currentNode.displayableName}</a>
         <ul>

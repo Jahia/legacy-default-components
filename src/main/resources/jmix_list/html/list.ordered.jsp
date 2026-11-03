@@ -14,7 +14,7 @@
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <template:addResources type="css" resources="fileList.css, simpleList.css"/>
 <template:include view="hidden.header"/>
-<ol class="${currentNode.properties['j:className'].string}">
+<ol class="${fn:escapeXml(currentNode.properties['j:className'].string)}">
 <c:forEach items="${moduleMap.currentList}" var="subchild" begin="${moduleMap.begin}" end="${moduleMap.end}">
     <li><template:module node="${subchild}" view="${moduleMap.subNodesView}" editable="${moduleMap.editable}"/></li>
 </c:forEach>
