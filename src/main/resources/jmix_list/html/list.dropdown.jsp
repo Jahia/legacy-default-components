@@ -18,7 +18,7 @@
 
 <ul class="dropdown ${fn:escapeXml(currentNode.properties['j:className'].string)}">
     <li>
-        <a href="#">${currentNode.displayableName}</a>
+        <a href="#">${fn:escapeXml(currentNode.displayableName)}</a>
         <ul>
             <c:forEach items="${moduleMap.currentList}" var="subchild" begin="${moduleMap.begin}"
                        end="${moduleMap.end}">
