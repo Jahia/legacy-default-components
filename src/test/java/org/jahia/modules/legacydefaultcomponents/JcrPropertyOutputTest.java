@@ -124,14 +124,25 @@ public class JcrPropertyOutputTest {
                 Collections.emptyList(), unencoded);
     }
 
-    // An HTML tag is open at this position, and it is no JSP action tag.
+    // An HTML tag is open at this position, and it is no JSP action tag. A closed action tag in
+    // an attribute of that HTML tag, such as <c:url .../> in an href, is stepped over.
     private static boolean isInHtmlTag(String source, int start, Set<String> prefixes) {
-        int tagStart = source.lastIndexOf('<', start);
-        if (tagStart < 0 || tagStart < source.lastIndexOf('>', start)) {
-            return false;
+        int position = start;
+        while (true) {
+            int tagStart = source.lastIndexOf('<', position);
+            if (tagStart < 0) {
+                return false;
+            }
+            Matcher tag = ACTION_TAG_NAME.matcher(source).region(tagStart, start);
+            boolean actionTag = tag.lookingAt() && prefixes.contains(tag.group(1));
+            if (tagStart > source.lastIndexOf('>', position)) {
+                return !actionTag;
+            }
+            if (!actionTag) {
+                return false;
+            }
+            position = tagStart - 1;
         }
-        Matcher tag = ACTION_TAG_NAME.matcher(source).region(tagStart, start);
-        return !tag.lookingAt() || !prefixes.contains(tag.group(1));
     }
 
     // An expression inside the attribute of a JSP action tag, such as <c:out value="..."/>,
