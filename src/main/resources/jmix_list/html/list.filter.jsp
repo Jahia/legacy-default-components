@@ -39,10 +39,10 @@
             <c:if test="${jcr:isNodeType(cat, 'jnt:category')}">
                 <jcr:nodeProperty node="${cat}" name="jcr:title" var="catTitle"/>
                 <c:if test="${cat.name eq param.categorykey}">
-                    <option selected value="${cat.name}">${catTitle.string}</option>
+                    <option selected value="${fn:escapeXml(cat.name)}">${fn:escapeXml(catTitle.string)}</option>
                 </c:if>
                 <c:if test="${cat.name ne param.categorykey}">
-                    <option value="${cat.name}">${catTitle.string}</option>
+                    <option value="${fn:escapeXml(cat.name)}">${fn:escapeXml(catTitle.string)}</option>
                 </c:if>
             </c:if>
         </c:forEach>
