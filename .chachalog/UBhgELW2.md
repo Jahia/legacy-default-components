@@ -2,4 +2,4 @@
 legacy-default-components: patch
 ---
 
-Fixed the category filter of content lists so that special characters such as `&` or quotes in category names and titles display as written.
+Fixed the category filter of content lists so that category titles containing `<`, `&` or quotes display as written.
