@@ -179,7 +179,7 @@
                         <img src="<c:url value='/icons/admin.png'/>" width="16" height="16" alt=" "
                              role="presentation" style="position:relative; top: 4px; margin-right:2px; "/><a
                             href="<c:url value='${basePreview}${node.path}${page}.${currentNode.properties.detailsTemplate.string}.html'/>"
-                            class="detailsButton" id="detailsButton${node.identifier}">${currentNode.properties.detailsLabel.string}</a>
+                            class="detailsButton" id="detailsButton${node.identifier}"><c:out value="${currentNode.properties.detailsLabel.string}"/></a>
                     </c:if>
 
                     <jsp:useBean id="nowDate" class="java.util.Date" />

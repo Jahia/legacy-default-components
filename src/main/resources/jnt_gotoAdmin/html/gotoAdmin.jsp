@@ -24,7 +24,7 @@
     <c:if test="${not empty linkTarget}"><c:set var="linkTarget"> target="${linkTarget}"</c:set></c:if>
     <c:choose>
         <c:when test="${not empty currentNode.properties['buttonClass']}">
-            <a href="${link}" class="${currentNode.properties['buttonClass'].string}"${linkTarget}>
+            <a href="${link}" class="${fn:escapeXml(currentNode.properties['buttonClass'].string)}"${linkTarget}>
                 <c:if test="${!empty currentNode.properties['jcr:title']}" var="titlePresent">
                     ${fn:escapeXml(currentNode.properties["jcr:title"].string)}
                 </c:if>
