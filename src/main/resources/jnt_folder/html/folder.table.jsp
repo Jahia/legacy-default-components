@@ -60,12 +60,12 @@
         </td>
         <td>
             <div class="jahia-template-gxt" jahiatype="module" id="module${child.identifier}" type="existingNode"
-                 scriptInfo="" path="${child.path}" template="hidden.system" dragdrop="false">
+                 scriptInfo="" path="${fn:escapeXml(child.path)}" template="hidden.system" dragdrop="false">
                 <c:if test="${child.locked}">
                     <img height="16" width="16" border="0" style="cursor: pointer;" title="Locked" alt="Supprimer"
                          src="<c:url value='${url.currentModule}/images/icons/locked.gif'/>">
                 </c:if>
-                <a href="<c:url value='${url.base}${child.path}.html'/>">
+                <a href="<c:url value='${url.base}${functions:escapePath(child.path)}.html'/>">
                     ${fn:escapeXml(!empty child.propertiesAsString['jcr:title'] ? child.propertiesAsString['jcr:title'] : child.name)}
                 </a>
             </div>
