@@ -21,7 +21,8 @@
     <tr>
         <th width="5%">
             <c:if test="${jcr:isNodeType(currentNode.parent,'jnt:contentFolder') || jcr:isNodeType(currentNode.parent,'jnt:folder')}">
-                <a title="parent" href="<c:url value='${url.base}${currentNode.parent.path}.html'/>"><img height="32" width="32"
+                <c:url var="parentUrl" value="${url.base}${currentNode.parent.path}.html"/>
+                <a title="parent" href="${fn:escapeXml(parentUrl)}"><img height="32" width="32"
                                                                                          border="0"
                                                                                          style="cursor: pointer;"
                                                                                          title="parent" alt="parent"
@@ -52,18 +53,20 @@
         </td>
         <td>
             <div class="jahia-template-gxt" jahiatype="module" id="module${child.identifier}" type="existingNode"
-                 scriptInfo="" path="${child.path}" template="hidden.system" dragdrop="false">
+                 scriptInfo="" path="${fn:escapeXml(child.path)}" template="hidden.system" dragdrop="false">
                 <c:if test="${child.locked}">
                     <img height="16" width="16" border="0" style="cursor: pointer;" title="Locked" alt="Supprimer"
                          src="<c:url value='${url.templatesPath}/default/images/icons/locked.gif'/>">
                 </c:if>
                 <c:if test="${jcr:isNodeType(child, 'jnt:contentFolder')}">
-                    <a href="<c:url value='${url.base}${child.path}.html'/>">
+                    <c:url var="childUrl" value="${url.base}${child.path}.html"/>
+                    <a href="${fn:escapeXml(childUrl)}">
                         ${fn:escapeXml(!empty child.propertiesAsString['jcr:title'] ? child.propertiesAsString['jcr:title'] : child.displayableName)}
                     </a>
                 </c:if>
                 <c:if test="${not jcr:isNodeType(child, 'jnt:contentFolder')}">
-                    <a href="<c:url value='${url.base}${child.path}.viewContent.html'/>">
+                    <c:url var="childUrl" value="${url.base}${child.path}.viewContent.html"/>
+                    <a href="${fn:escapeXml(childUrl)}">
                         ${fn:escapeXml(!empty child.propertiesAsString['jcr:title'] ? child.propertiesAsString['jcr:title'] : child.displayableName)}
                     </a>
                 </c:if>
