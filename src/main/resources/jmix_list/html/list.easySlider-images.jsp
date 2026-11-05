@@ -30,7 +30,7 @@
                     <c:choose>
                         <c:when test="${jcr:isNodeType(image, 'jmix:thumbnail')}">
                             <c:url value="${url.files}${image.path}" var="imgUrl"/>
-                            <img src="${imgUrl}" alt="">
+                            <img src="${fn:escapeXml(imgUrl)}" alt="">
                         </c:when>
                     </c:choose>
                 </c:if>
