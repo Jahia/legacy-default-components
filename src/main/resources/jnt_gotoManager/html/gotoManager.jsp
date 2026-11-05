@@ -3,14 +3,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="template" uri="http://www.jahia.org/tags/templateLib" %>
 <%@ taglib prefix="jcr" uri="http://www.jahia.org/tags/jcr" %>
+<%@ taglib prefix="functions" uri="http://www.jahia.org/tags/functions" %>
 <c:if test="${!renderContext.settings.readOnlyMode and !renderContext.settings.distantPublicationServerMode}">
 <template:addResources type="css" resources="gotomanager.css"/>
     <c:if test="${currentResource.workspace eq 'live'}">
         <template:addResources type="javascript" resources="jquery.min.js"/>
         <template:addResources type="css" resources="goto-links.css"/>
         <div id="gotoManager${currentNode.identifier}"/>
+        <c:url var="gotoManagerUrl" value="${url.basePreview}${currentNode.path}.html.ajax"/>
         <script type="text/javascript">
-            $('#gotoManager${currentNode.identifier}').load('<c:url value="${url.basePreview}${currentNode.path}.html.ajax"/>');
+            $('#gotoManager${currentNode.identifier}').load('${functions:escapeJavaScript(gotoManagerUrl)}');
         </script>
         </div>
     </c:if>
