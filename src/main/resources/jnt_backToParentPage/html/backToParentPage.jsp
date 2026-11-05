@@ -21,5 +21,5 @@
     <c:if test="${empty jcr:findDisplayableNode(renderContext.mainResource.node.parent, renderContext)}">
         <c:set var="action">javascript:history.back()</c:set>
     </c:if>
-    <a class="returnLink" href="${action}" title='<fmt:message key="backToPreviousPage"/>'>${title}</a>
+    <a class="returnLink" href="${action}" title='<fmt:message key="backToPreviousPage"/>'><c:out value="${title}"/></a>
 </div>
