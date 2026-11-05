@@ -41,7 +41,7 @@
     <c:forEach items="${moduleMap.currentList}" var="child" begin="${moduleMap.begin}" end="${moduleMap.end}"
                varStatus="status">
         <tr class="${status.count % 2 == 0 ? 'even' : 'odd'}">
-        <td>${child.properties["jcr:mimeType"].string}
+        <td>${fn:escapeXml(child.properties["jcr:mimeType"].string)}
 
             <jcr:icon var="icon" node="${child}"/>
             <img src="<c:url value='${url.templatesPath}/${icon}_large.png'/>"/>

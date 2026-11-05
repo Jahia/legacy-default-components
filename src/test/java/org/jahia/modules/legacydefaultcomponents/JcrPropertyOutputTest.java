@@ -98,6 +98,34 @@ public class JcrPropertyOutputTest {
     }
 
     @Test
+    public void everyMimeTypeInHtmlTextIsEncoded() throws Exception {
+        Path root = viewRoot();
+        List<Path> views = views(root);
+        List<String> unencoded = new ArrayList<>();
+        int expressions = 0;
+
+        for (Path view : views) {
+            String source = JSP_COMMENT.matcher(read(view)).replaceAll("");
+            Set<String> prefixes = taglibPrefixes(source);
+            Matcher expression = MIME_TYPE_EXPRESSION.matcher(source);
+            while (expression.find()) {
+                if (isInHtmlTag(source, expression.start(), prefixes)) {
+                    continue;
+                }
+                expressions++;
+                if (!isEncoded(source, expression.group(), expression.start(), prefixes)) {
+                    unencoded.add(root.relativize(view) + " -> " + expression.group());
+                }
+            }
+        }
+
+        assertFalse("no views were scanned under " + root, views.isEmpty());
+        assertTrue("no mimeType expression in HTML text was scanned", expressions > 0);
+        assertEquals("every mimeType a view prints as HTML text is expected to go through an encoder",
+                Collections.emptyList(), unencoded);
+    }
+
+    @Test
     public void everyDisplayableNameInAnHtmlAttributeIsEncoded() throws Exception {
         Path root = viewRoot();
         List<Path> views = views(root);
