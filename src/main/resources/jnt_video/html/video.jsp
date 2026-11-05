@@ -38,7 +38,7 @@
        preload="${renderContext.editMode ? "metadata" : "auto"}"
        width="${fn:escapeXml(currentNode.properties.width.string)}" height="${fn:escapeXml(currentNode.properties.height.string)}"
        data-setup='{"techOrder":["html5"]}'>
-  <source src="${source.url}" type='${mimeType.string == "video/x-f4v" ? "video/mp4" : mimeType.string}' />
+  <source src="${source.url}" type='${fn:escapeXml(mimeType.string == "video/x-f4v" ? "video/mp4" : mimeType.string)}' />
 </video>
     </c:otherwise>
 </c:choose>

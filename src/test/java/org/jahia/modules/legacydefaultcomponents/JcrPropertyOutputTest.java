@@ -35,6 +35,7 @@ public class JcrPropertyOutputTest {
             Pattern.compile("\\$\\{[^}]*'(?:jcr:createdBy|jcr:lastModifiedBy|j:lastPublishedBy)'[^}]*}");
     private static final Pattern DISPLAYABLE_NAME_EXPRESSION =
             Pattern.compile("\\$\\{[^}]*\\bdisplayableName\\b[^}]*}");
+    private static final Pattern MIME_TYPE_EXPRESSION = Pattern.compile("\\$\\{[^}]*\\bmimeType\\b[^}]*}");
     private static final Pattern ENCODED_EXPRESSION = Pattern.compile("\\$\\{\\s*fn:escapeXml\\(");
     private static final Pattern TAGLIB_PREFIX = Pattern.compile("<%@\\s*taglib\\b[^>]*?\\bprefix\\s*=\\s*\"(\\w+)\"");
     private static final Pattern JSP_COMMENT = Pattern.compile("<%--.*?--%>", Pattern.DOTALL);
@@ -121,6 +122,34 @@ public class JcrPropertyOutputTest {
         assertFalse("no views were scanned under " + root, views.isEmpty());
         assertTrue("no displayableName expression in an HTML attribute was scanned", expressions > 0);
         assertEquals("every displayableName a view prints in an HTML attribute is expected to go through an encoder",
+                Collections.emptyList(), unencoded);
+    }
+
+    @Test
+    public void everyMimeTypeInAnHtmlAttributeIsEncoded() throws Exception {
+        Path root = viewRoot();
+        List<Path> views = views(root);
+        List<String> unencoded = new ArrayList<>();
+        int expressions = 0;
+
+        for (Path view : views) {
+            String source = JSP_COMMENT.matcher(read(view)).replaceAll("");
+            Set<String> prefixes = taglibPrefixes(source);
+            Matcher expression = MIME_TYPE_EXPRESSION.matcher(source);
+            while (expression.find()) {
+                if (!isInHtmlTag(source, expression.start(), prefixes)) {
+                    continue;
+                }
+                expressions++;
+                if (!isEncoded(source, expression.group(), expression.start(), prefixes)) {
+                    unencoded.add(root.relativize(view) + " -> " + expression.group());
+                }
+            }
+        }
+
+        assertFalse("no views were scanned under " + root, views.isEmpty());
+        assertTrue("no mimeType expression in an HTML attribute was scanned", expressions > 0);
+        assertEquals("every mimeType a view prints in an HTML attribute is expected to go through an encoder",
                 Collections.emptyList(), unencoded);
     }
 
