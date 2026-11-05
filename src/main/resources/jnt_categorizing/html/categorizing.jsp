@@ -35,7 +35,7 @@
             }
             if ($("#categorytoadd").val() != "" && !isAlreadyExist) {
                 uuids.push($("#categorytoadd").val());
-                $.post("${postUrl}", {"j:defaultCategory":uuids,"jcrMethodToCall":"put","jcr:mixinTypes":"jmix:categorized"}, function(result) {
+                $.post("${fn:replace(functions:escapeJavaScript(postUrl), '<', '\\x3C')}", {"j:defaultCategory":uuids,"jcrMethodToCall":"put","jcr:mixinTypes":"jmix:categorized"}, function(result) {
                     var catContainer = jQuery('#jahia-categories-' + uuid);
                     if (jQuery(".nocategorizeditem" + uuid).length > 0 && $(".nocategorizeditem" + uuid).is(":visible")) {
                         jQuery(".nocategorizeditem" + uuid).hide();

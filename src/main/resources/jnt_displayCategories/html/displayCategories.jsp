@@ -43,7 +43,7 @@
                 }
                 uuids = newUuids;
                 if (uuids.length == 0) {
-                    $.post("${postUrl}", {"jcrMethodToCall":"put","jcrRemoveMixin":"jmix:categorized"}, function(result) {
+                    $.post("${fn:replace(functions:escapeJavaScript(postUrl), '<', '\\x3C')}", {"jcrMethodToCall":"put","jcrRemoveMixin":"jmix:categorized"}, function(result) {
                         $("#category" + uuid).hide();
                         if (uuids.length == 0) {
                             var spanNoYetCat = $('<span><fmt:message key="label.categories.noCategory"/></span>').attr('class', 'nocategorizeditem' + uuidCategories);
@@ -51,7 +51,7 @@
                         }
                     }, "json");
                 } else {
-                    $.post("${postUrl}", {"j:defaultCategory":uuids,"jcrMethodToCall":"put","jcr:mixinTypes":"jmix:categorized"}, function(result) {
+                    $.post("${fn:replace(functions:escapeJavaScript(postUrl), '<', '\\x3C')}", {"j:defaultCategory":uuids,"jcrMethodToCall":"put","jcr:mixinTypes":"jmix:categorized"}, function(result) {
                         $("#category" + uuid).hide();
                     }, "json");
                 }
